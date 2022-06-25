@@ -12,9 +12,9 @@ def newuser(request):
         ufrom.save()
         print("Signup successfull")
         sub='Login Successfull'
-        msg='Welcome to our new project/nJayrajsinh Mori/n+91 7788996655 '
+        msg='Welcome to our new project/nJayrajsinh Mori/n+91 7788996655'
         frm=settings.EMAIL_HOST_USER
-        to_mail=['jayrajmori111@gmail.com','sanketbarot74@gmail0.com','jugalgajjar11@gmail.com']
+        to_mail=['jugalgajjar11@gmail.com','jayrajmori111@gmail.com']
         send_mail(sub,msg,frm,to_mail)
         
         return redirect('/') 
