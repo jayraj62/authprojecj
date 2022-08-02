@@ -8,15 +8,13 @@ from authproject import settings
 # Create your views here.
 def newuser(request):
     ufrom=userform(request.POST)
+    
+    unm=request.POST["uname"]
     if ufrom.is_valid():
-        ufrom.save()
+        ufrom.save() 
         print("Signup successfull")
-        sub='Login Successfull'
-        msg='Welcome to our new project/nJayrajsinh Mori/n+91 7788996655'
-        frm=settings.EMAIL_HOST_USER
-        to_mail=['jugalgajjar11@gmail.com','jayrajmori111@gmail.com']
-        send_mail(sub,msg,frm,to_mail)
-        
+        request.session["user"]=unm
+      
         return redirect('/') 
     else:
         print(ufrom.errors)
@@ -28,13 +26,17 @@ def userlogin(request):
     userID=usersignup.objects.get(uname=unm)
     print("Userid:",userID.id) 
     user=usersignup.objects.filter(uname=unm,password=pas)
-
-
+    
     if user:
+        sub='Login Successfull'
+        msg='Welcome to our new project\nRegards, Jayrajsinh Mori\n+917788996655'
+        frm=settings.EMAIL_HOST_USER
+        to_mail=['jayrajmori111@gmail.com']
+        send_mail(sub,msg,frm,to_mail)
         print('Login successfull')
         
 
-        request.session["user"]=unm
+        request.session["user"]=unm  
         request.session["userid"]=userID.id
     else:
         print("'Login Failed")
